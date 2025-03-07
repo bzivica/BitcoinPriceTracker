@@ -33,10 +33,36 @@ namespace BitcoinApp
             //_databaseService.CreateDatabaseIfNotExists();
 
             _databaseService.CreateDatabaseSchema();
+            
+            InitialSettings();
 
             StartTimer();
         }
 
+        private void InitialSettings()
+        {
+            button1.BackColor = Color.Blue;
+            button1.ForeColor = Color.White;
+            button1.FlatStyle = FlatStyle.Flat;  // Moderní vzhled bez okrajů
+            button1.FlatAppearance.BorderSize = 0;  // Bez okrajů
+            button1.MouseEnter += (s, e) => { button1.BackColor = Color.DarkBlue; };
+            button1.MouseLeave += (s, e) => { button1.BackColor = Color.Blue; };
+
+            button2.BackColor = Color.Blue;
+            button2.ForeColor = Color.White;
+            button2.FlatStyle = FlatStyle.Flat;  // Moderní vzhled bez okrajů
+            button2.FlatAppearance.BorderSize = 0;  // Bez okrajů
+            button2.MouseEnter += (s, e) => { button1.BackColor = Color.DarkBlue; };
+            button2.MouseLeave += (s, e) => { button1.BackColor = Color.Blue; };
+
+            button3.BackColor = Color.Blue;
+            button3.ForeColor = Color.White;
+            button3.FlatStyle = FlatStyle.Flat;  // Moderní vzhled bez okrajů
+            button3.FlatAppearance.BorderSize = 0;  // Bez okrajů
+            button3.MouseEnter += (s, e) => { button1.BackColor = Color.DarkBlue; };
+            button3.MouseLeave += (s, e) => { button1.BackColor = Color.Blue; };
+
+        }
         private void StartTimer()
         {
             _timer = new System.Threading.Timer(OnTimerElapsed, null, 0, _fetchInterval);
@@ -49,11 +75,19 @@ namespace BitcoinApp
                 (bitcoinPriceEUR, bitcoinPriceCZK) = await _priceCalculatorService.GetBitcoinPriceAsync();
 
                 // Přidání dat do DataGridView
-                dataGridView1.Rows.Add(DateTime.Now, bitcoinPriceEUR, bitcoinPriceCZK);
+                dataGridView1.Rows.Add(bitcoinPriceEUR, bitcoinPriceCZK, DateTime.Now);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Chyba při získávání dat: {ex.Message}");
+            }
+        }
+
+        private void FormatTimestampColumn()
+        {
+            if (dataGridView2.Columns.Contains("Timestamp"))
+            {
+                dataGridView2.Columns["Timestamp"].DefaultCellStyle.Format = "dd.MM.yyyy HH:mm:ss";  // Datum + čas
             }
         }
 
@@ -65,8 +99,12 @@ namespace BitcoinApp
             // Nastavujeme data jako DataSource pro DataGridView
             dataGridView2.DataSource = bitcoinData;
 
-            // Můžeš také přidat možnosti formátování nebo další úpravy
-            dataGridView2.Columns["Id"].Visible = false;  // Skrytí sloupce Id, pokud nechceš, aby byl zobrazen
+            if (dataGridView2.Columns.Contains("Note"))
+            {
+                dataGridView2.Columns["Note"].ReadOnly = false;
+            }
+
+            FormatTimestampColumn();
         }
 
         // Tato metoda bude zavolána při každém tiku timeru
@@ -77,18 +115,18 @@ namespace BitcoinApp
                 // Získání ceny Bitcoinu v CZK
                 (bitcoinPriceEUR, bitcoinPriceCZK) = await _priceCalculatorService.GetBitcoinPriceAsync();
 
-                // Přidání nových dat do DataGridView
+                // Vyprázdnění DataGridView před přidáním nových dat
                 dataGridView1.Invoke((Action)(() =>
                 {
-                    dataGridView1.Rows.Add(DateTime.Now, bitcoinPriceEUR, bitcoinPriceCZK);
+                    dataGridView1.Rows.Clear();  // Vymaže všechny předchozí řádky
+                    dataGridView1.Rows.Add(bitcoinPriceEUR, bitcoinPriceCZK, DateTime.Now);  // Přidá nový řádek s aktuálními daty
                 }));
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Chyba při načítání dat: {ex.Message}");
-            }
+           }
         }
-
         // Zastavení timeru při zavření formuláře
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
@@ -143,6 +181,16 @@ namespace BitcoinApp
             }
 
             MessageBox.Show("Změny byly úspěšně uloženy.");
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Pokud je aktivní tab "Saved Data" (nebo podobný)
+            if (tabControl.SelectedTab?.Name == "tabSavedData")
+            {
+                // Zavoláme metodu pro načtení historických dat
+                LoadBitcoinData();
+            }
         }
     }
 }

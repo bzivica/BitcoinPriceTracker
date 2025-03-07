@@ -9,7 +9,8 @@ namespace BitcoinApp.Services
 {
     public class CoindeskService
     {
-        private readonly string coindeskApiUrl = "https://api.coindesk.com/v1/bpi/currentprice.json";
+        //private readonly string coindeskApiUrl = "https://api.coindesk.com/v1/bpi/currentprice.json";
+        private readonly string coindeskApiUrl = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur,gbp,jpy,cad\r\n";//"https://api.coingecko.com/api/v3/coins/bitcoin";
 
         public async Task<decimal> GetBitcoinPriceInEURAsync()
         {

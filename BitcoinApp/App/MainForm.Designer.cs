@@ -28,11 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             panel1 = new Panel();
             tabControl = new TabControl();
             tabLiveData = new TabPage();
             button1 = new Button();
             dataGridView1 = new DataGridView();
+            PriceEUR = new DataGridViewTextBoxColumn();
+            PriceCZK = new DataGridViewTextBoxColumn();
+            Timestamp = new DataGridViewTextBoxColumn();
             tabSavedData = new TabPage();
             button3 = new Button();
             button2 = new Button();
@@ -48,9 +55,10 @@
             // panel1
             // 
             panel1.Controls.Add(tabControl);
-            panel1.Location = new Point(-3, 4);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(804, 292);
+            panel1.Size = new Size(630, 296);
             panel1.TabIndex = 0;
             // 
             // tabControl
@@ -58,28 +66,29 @@
             tabControl.Controls.Add(tabLiveData);
             tabControl.Controls.Add(tabSavedData);
             tabControl.Location = new Point(3, 2);
-            tabControl.Name = "tabLiveData";
+            tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(798, 289);
+            tabControl.Size = new Size(615, 282);
             tabControl.TabIndex = 0;
+            tabControl.SelectedIndexChanged += tabControl_SelectedIndexChanged;
             // 
-            // tabPage1
+            // tabLiveData
             // 
             tabLiveData.Controls.Add(button1);
             tabLiveData.Controls.Add(dataGridView1);
             tabLiveData.Location = new Point(4, 29);
             tabLiveData.Name = "tabLiveData";
             tabLiveData.Padding = new Padding(3);
-            tabLiveData.Size = new Size(790, 256);
+            tabLiveData.Size = new Size(607, 249);
             tabLiveData.TabIndex = 0;
             tabLiveData.Text = "Live Data";
             tabLiveData.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            button1.Location = new Point(657, 209);
+            button1.Location = new Point(510, 191);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(94, 55);
             button1.TabIndex = 1;
             button1.Text = "Save";
             button1.UseVisualStyleBackColor = true;
@@ -87,13 +96,59 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { PriceEUR, PriceCZK, Timestamp });
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = SystemColors.Window;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
             dataGridView1.Dock = DockStyle.Top;
             dataGridView1.Location = new Point(3, 3);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(784, 188);
+            dataGridView1.Size = new Size(601, 188);
             dataGridView1.TabIndex = 0;
+            // 
+            // PriceEUR
+            // 
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Format = "C3";
+            dataGridViewCellStyle5.NullValue = null;
+            PriceEUR.DefaultCellStyle = dataGridViewCellStyle5;
+            PriceEUR.HeaderText = "Price EUR";
+            PriceEUR.MinimumWidth = 6;
+            PriceEUR.Name = "PriceEUR";
+            PriceEUR.ReadOnly = true;
+            PriceEUR.Width = 125;
+            // 
+            // PriceCZK
+            // 
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.Format = "C3";
+            dataGridViewCellStyle6.NullValue = null;
+            PriceCZK.DefaultCellStyle = dataGridViewCellStyle6;
+            PriceCZK.HeaderText = "Pice CZK";
+            PriceCZK.MinimumWidth = 6;
+            PriceCZK.Name = "PriceCZK";
+            PriceCZK.ReadOnly = true;
+            PriceCZK.Width = 125;
+            // 
+            // Timestamp
+            // 
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.Format = "g";
+            Timestamp.DefaultCellStyle = dataGridViewCellStyle7;
+            Timestamp.HeaderText = "Date";
+            Timestamp.MinimumWidth = 6;
+            Timestamp.Name = "Timestamp";
+            Timestamp.ReadOnly = true;
+            Timestamp.Width = 125;
             // 
             // tabSavedData
             // 
@@ -103,14 +158,14 @@
             tabSavedData.Location = new Point(4, 29);
             tabSavedData.Name = "tabSavedData";
             tabSavedData.Padding = new Padding(3);
-            tabSavedData.Size = new Size(790, 256);
+            tabSavedData.Size = new Size(607, 249);
             tabSavedData.TabIndex = 1;
             tabSavedData.Text = "Saved Data";
             tabSavedData.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            button3.Location = new Point(674, 218);
+            button3.Location = new Point(505, 214);
             button3.Name = "button3";
             button3.Size = new Size(94, 29);
             button3.TabIndex = 2;
@@ -120,7 +175,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(532, 218);
+            button2.Location = new Point(405, 214);
             button2.Name = "button2";
             button2.Size = new Size(94, 29);
             button2.TabIndex = 1;
@@ -132,21 +187,24 @@
             // 
             dataGridView2.AllowUserToAddRows = false;
             dataGridView2.AllowUserToDeleteRows = false;
+            dataGridView2.BackgroundColor = SystemColors.Control;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Dock = DockStyle.Top;
             dataGridView2.Location = new Point(3, 3);
             dataGridView2.Name = "dataGridView2";
-            dataGridView2.ReadOnly = true;
             dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(784, 188);
+            dataGridView2.Size = new Size(601, 188);
             dataGridView2.TabIndex = 0;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 296);
+            AutoSize = true;
+            ClientSize = new Size(630, 296);
             Controls.Add(panel1);
+            ForeColor = SystemColors.ControlText;
+            MinimumSize = new Size(640, 110);
             Name = "MainForm";
             Text = "Bitcoin Price Tracker";
             Load += MainForm_Load;
@@ -170,5 +228,8 @@
         private Button button1;
         private Button button3;
         private Button button2;
+        private DataGridViewTextBoxColumn PriceEUR;
+        private DataGridViewTextBoxColumn PriceCZK;
+        private DataGridViewTextBoxColumn Timestamp;
     }
 }

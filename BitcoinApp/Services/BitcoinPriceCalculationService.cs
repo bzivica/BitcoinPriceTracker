@@ -21,7 +21,7 @@ namespace BitcoinApp.Services
         public async Task<(decimal bitcoinPriceEUR, decimal bitcoinPriceCZK)> GetBitcoinPriceAsync()
         {
             // Získání ceny Bitcoinu v EUR
-            decimal bitcoinPriceEUR = await _coindeskService.GetBitcoinPriceInEURAsync();
+            decimal bitcoinPriceEUR = 1;//test only  await _coindeskService.GetBitcoinPriceInEURAsync();
 
             // Získání kurzu EUR -> CZK
             decimal eurToCzkRate = await _cnbService.GetEurToCzkRateAsync();

@@ -11,9 +11,11 @@ namespace BitcoinApp.Services
 
     public class CnbService
     {
-        private readonly string cnbApiUrl = "https://api.cnb.cz/kurzy/v1/meny.json"; 
+        private readonly string baseApiUrl = "https://api.cnb.cz/cnbapi/exrates/daily?date=";
+        //private readonly string cnbApiUrl = "https://api.cnb.cz/cnbapi/exrates/daily?date=2025-03-07"; 
         public async Task<decimal> GetEurToCzkRateAsync()
         {
+            string cnbApiUrl = $"{baseApiUrl}{DateTime.Now.ToString("yyyy-MM-dd")}";
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetStringAsync(cnbApiUrl);
@@ -25,13 +27,14 @@ namespace BitcoinApp.Services
                     throw new Exception("Rates not found in the response.");
                 }
 
-                var eur = rates["EUR"];
-                if (eur == null)
+                // Hledání měny EUR v poli rates
+                var eurRate = rates.FirstOrDefault(rate => rate["currencyCode"]?.ToString() == "EUR");
+                if (eurRate == null)
                 {
                     throw new Exception("EUR rate not found in the response.");
                 }
 
-                var rate = eur["rate"];
+                var rate = eurRate["rate"];
                 if (rate == null)
                 {
                     throw new Exception("Rate value not found in the response.");

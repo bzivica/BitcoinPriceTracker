@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 using BitcoinApp.Models;
 using System.IO;
 using Microsoft.Extensions.Configuration;
+using System.ComponentModel;
 
 namespace BitcoinApp.Services
 {
@@ -97,9 +98,9 @@ namespace BitcoinApp.Services
         }
 
         // Získání uložených dat o Bitcoinu
-        public List<BitcoinData> GetSavedBitcoinData()
+        public BindingList<BitcoinData> GetSavedBitcoinData()
         {
-            List<BitcoinData> dataList = new List<BitcoinData>();
+            BindingList<BitcoinData> dataList = new BindingList<BitcoinData>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
