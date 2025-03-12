@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitcoinApp", "BitcoinApp.csproj", "{5ED6FC39-D2B4-44C3-B3CC-0A1EF8DE187B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitcoinApp.Tests", "..\BitCoinApp.Tests\BitcoinApp.Tests.csproj", "{BB5174C0-A2BB-6DDB-A5FC-FAD4F000FECD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5ED6FC39-D2B4-44C3-B3CC-0A1EF8DE187B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ED6FC39-D2B4-44C3-B3CC-0A1EF8DE187B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ED6FC39-D2B4-44C3-B3CC-0A1EF8DE187B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ED6FC39-D2B4-44C3-B3CC-0A1EF8DE187B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB5174C0-A2BB-6DDB-A5FC-FAD4F000FECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB5174C0-A2BB-6DDB-A5FC-FAD4F000FECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB5174C0-A2BB-6DDB-A5FC-FAD4F000FECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB5174C0-A2BB-6DDB-A5FC-FAD4F000FECD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB19E3A1-7463-4271-B2DE-D5F6A798E0FF}
+	EndGlobalSection
+EndGlobal
