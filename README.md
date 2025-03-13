@@ -34,4 +34,4 @@ BitcoinApp je aplikace pro sledování aktuálních cen Bitcoinu v EUR a jejich 
 
 1. Klonujte repozitář:
    bash
-   git clone https://github.com/bzivica/BitcoinPriceTracker
+   git clone https://github.com/bzivica/BitcoinPriceTracker.git
